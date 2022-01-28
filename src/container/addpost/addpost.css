@@ -1,0 +1,18 @@
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+div {
+    /* margin-bottom: 10px; */
+  }
+button { 
+    align-self: center;
+    /* border: 3px solid rgb(13, 14, 14); */
+    /* grid-template-columns:repeat(3fr) */
+}
+/* .Contaner input{ */
+    /* display: inherit; */
+  /* flex-direction: row;  */
+    
+/* }  */

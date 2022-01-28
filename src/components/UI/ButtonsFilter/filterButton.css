@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+.btns {
+  font-family: 'Dancing Script', cursive;
+  font-size: 30px;
+  text-transform: capitalize;
+  list-style: none;
+    outline: none;
+    padding: 5px 16px;
+    overflow: hidden;
+    margin: 0;
+    background-color: white;
+    cursor: pointer;
+    margin: 2px;
+    
+  }
+  .active-link{
+    background-color: #04AA6D;
+
+  }
+  .btns:hover {
+    border-bottom: 3px solid red;
+  }
+  
+  

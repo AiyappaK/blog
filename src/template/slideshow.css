@@ -1,0 +1,124 @@
+.sticky {
+  width: 100%;
+  /* max-width: 1440px; */
+  /* margin: 0 auto; */
+  padding: 0 15px;
+  position: fixed;
+  background-color: transparent;
+
+z-index: 999;
+}
+
+.NavigationItems {  
+  /* 
+  height: auto;
+  display: flex;
+ width: 100%;
+  align-items: center;
+  font-size: 1.2rem;
+  
+  top: 0;
+  
+  justify-content: space-between; */
+  /* padding: 0 50px 0 100px; */
+  /* flex-wrap: wrap;
+
+  border: double; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid #000; */
+}
+.scroll {
+  background-color: blue;
+}
+.sitelogo{
+  /* width: 250px; */
+  /* display: inline-block; */
+  color: rgb(192, 24, 24);
+  /* height: 80%;  */
+  /* font-size: 30px; */
+  /* justify-self: start;  */
+  /* cursor: pointer; */
+  /* margin-left: 20px; */
+  /* border: dotted; */
+
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  /* color: #fff; */
+  text-decoration: none;
+}
+
+.NaviItems{
+  /* /* flex: 1; */
+  /* float: right;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  border: double; */
+  margin: 0;
+padding: 0;
+list-style: none;
+display: flex;
+}
+.NavigationItem {
+  /* display: flex;
+   margin: 0 5px;
+   
+text-decoration: none;
+font-size: 18px;
+font-weight: 500; */
+/* padding: 8px 15px; */
+/* border-radius: 5px; */
+/* letter-spacing: 1px; */
+/* height: 20px; */
+/* border: double; */
+
+
+   padding: 0 5px 0 3px;
+}
+
+.NavigationItem a {
+/*     
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.3s ease; */
+  color: rgb(219, 31, 31);
+padding: 20px;
+display: block;
+text-decoration: none;
+text-transform: uppercase;
+}
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+  
+  background: rgba(255,255,255,.6);
+}
+
+@media (min-width: 400px) {
+  .NavigationItem {
+      margin: 0;
+      display: flex;
+      height: 100%;
+      width: auto;
+      align-items: center;
+  }
+  
+  .NavigationItem a {
+      color: rgb(5, 5, 5);
+      height: 100%;
+      padding: 16px 10px;
+      border-bottom: 4px solid transparent;
+  }
+  
+  .NavigationItem a:hover,
+  .NavigationItem a:active,
+  .NavigationItem a.active {
+      /* background-color: #8F5C2C; */
+      /* border-bottom: 4px solid #40A4C8; */
+      color: rgb(199, 9, 9);
+  }
+}
+
