@@ -77,8 +77,6 @@ max-width: 700px;
 }
 
 .about{
-  
-  /* padding:; */
 overflow: hidden;
 height: 100vh;
 display: flex;
@@ -171,4 +169,34 @@ transition: all 0.3s ease;
   position: relative;
   /* margin: auto; */
   /* flex-direction: row; */
+}
+
+@media (max-width:600px){
+  .Blog{
+    /* width: 500px; */
+  }
+  .text h2{
+font-size: 2em;
+  }
+  .text p
+{
+font-size: 1em;
+max-width: 400px;
+}
+.about{
+  flex-direction: column;
+
+  /* width: 100%; */
+
+}
+.about-title{
+  width: fit-content;
+  padding-left: 5px;
+  font-size: 20px;
+
+}
+.about-pages{
+  padding-top: 20px;
+  width: fit-content;
+}
 }

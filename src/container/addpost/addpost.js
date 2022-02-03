@@ -4,7 +4,7 @@ import firebase from '../../firebase';
 import imageCompression from 'browser-image-compression';
 import { connect } from 'react-redux';
 import * as addActions from '../../store/actions/addaction';
-import SelectedBlog from '../../components/selectedBlog/selectedblog';
+
 
 // import Post from "../../components/UI/posts/post";
 // import axios from 'axios';
@@ -16,7 +16,8 @@ const initalState = {
     caption: '',
     Album: '',
     imgaes: '',
-
+    name: '',
+    gsurl:'',
     iError: "",
     captionError: "",
     imgaesError: "",
@@ -59,18 +60,24 @@ class Addpost extends Component {
         this.validate()
         e.preventDefault();
         const i = this.state.imgaes;
+        console.log(i.name);
         const options = {
             maxSizeMB: 1,
             maxWidthOrHeight: 1920,
             useWebWorker: true
         }
         const compressedFile = await imageCompression(i, options);
+
         let storageRef = firebase.storage().ref();
         let metadata = {
             contentType: 'image/jpeg'
         };
-
         const fileRef = storageRef.child(i.name).put(i, metadata);
+        this.setState({ name: i.name });
+
+        // console.log(fileRef );
+        console.log('i.statename', this.state.name);
+        console.log( 'i', i);
 
         fileRef.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) => {
@@ -101,18 +108,25 @@ class Addpost extends Component {
             },
             () => {
                 // Upload completed successfully, now we can get the download URL
+                
+                let storage = firebase.storage();
+                let fileRe = (`gs://blog-3dcd5.appspot.com/${i.name}`);
+                this.setState({ gsurl: fileRe });
+                console.log("File in database before delete exists : "+ this.state.gsurl)
+
+
                 fileRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                    // console.log('File available at', downloadURL);
+                    console.log('File available at', downloadURL);
                     this.setState({ Url: downloadURL });
                     
-                    this.setState(prevState => ({
-                        // ...prevState,
-                            post:{
-                                ...prevState.post,
-                                Url : downloadURL
-                        }
+                    // this.setState(prevState => ({
+                        // ...prevState, to delete a file you have to save i.name and fileRe in datatbase link https://firebase.google.com/docs/storage/web/delete-files  
+                    //         post:{
+                    //             ...prevState.post,
+                    //             Url : downloadURL
+                    //     }
                                 
-                    }))
+                    // }))
                     this.posts()
                     // console.log(this.state.Url);
                 });
@@ -124,14 +138,17 @@ class Addpost extends Component {
     }
 
     posts = () => {
-        console.log(this.state.post);
 
         const I = {
             title: this.state.title,
             caption: this.state.caption,
             Url: this.state.Url,
-            Album: this.state.Album
+            Album: this.state.Album,
+            gsurl: this.state.gsurl,
+            name: this.state.name
         };
+        console.log(I);
+
         this.props.onAddPost(I) 
         
     }
@@ -195,7 +212,7 @@ class Addpost extends Component {
                 </div>
                 <div>
                 </div>
-                <SelectedBlog/>
+               
             </div>
 
         );

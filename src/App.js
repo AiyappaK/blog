@@ -31,8 +31,9 @@ class App extends Component {
         <Route path='/blog' component={Blog} />
         <Route path="/About" component={About} />
         <Route path="/contact" component={contact} />
-      <Route path="/Blogs" component={AddBlog} />
+      <Route path="/AddBlogs" component={AddBlog} />
       <Route path="/vBlogs" component={viewBlog} />
+      <Route path="/Addpost" component={Addpost} />
 
       </Switch>
       )
@@ -46,7 +47,7 @@ class App extends Component {
       <Route path="/About" component={About} />
       <Route path="/contact" component={contact} />
       <Route path="/Addpost" component={Addpost} />
-      <Route path="/Blogs" component={AddBlog} />
+      <Route path="/AddBlogs" component={AddBlog} />
 
       <Route path="/fullpost/:id" exact component={FullPost} />
       </Switch>

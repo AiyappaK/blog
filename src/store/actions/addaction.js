@@ -129,6 +129,7 @@ export const ViewBlog = () =>{
            dispatch(viewBlogFail(err))
         })
     }
+
 }
 
 export const selectedPost = (id) =>{
@@ -136,19 +137,13 @@ export const selectedPost = (id) =>{
         dispatch(selectedBlogStart())
         axios.get(`https://blog-3dcd5-default-rtdb.firebaseio.com/blog/${id}.json`)
         .then(res => {
-            console.log(res.data);
+            console.log(res.data ,id);
             const fetched = [res.data];
-            // for (let key in res.data)
-            //     fetched.push(
-            //         {
-            //             ...res.data[key],
-            //             id: key
-            //         }
-            //     ) map reduce spreadopreator
+            console.log(fetched);
             //     fetched.reverse()
-                console.log('fetched',fetched);
+                // console.log('fetched',fetched);
                 
-            dispatch(selectedBlogSucess(fetched))                    
+            dispatch(selectedBlogSucess(fetched, id) )                   
         })
         .catch(err => {
             console.log(err);
@@ -162,10 +157,38 @@ export const selectedBlogStart = () => {
     }
 }
 
-export const selectedBlogSucess = (blog) => {
+export const selectedBlogSucess = (blog , id) => {
     return {
         type: actionTypes.VIEW_SELECTED_BLOG_SUCCESS,
-        select:blog
+        select:blog,
+        id: id
         // payload
+    }
+}
+export const updatedSucess = () => {
+    return {
+        type: actionTypes.UPDATED_SUCESS,
+        
+    }
+}
+export const updated = (id, data) =>{
+    return dispatch => {
+        axios.put(`https://blog-3dcd5-default-rtdb.firebaseio.com/blog/${id}.json`,data)
+        .then(response => {
+            dispatch (updatedSucess())
+            dispatch(ViewBlog())
+            console.log(response)})
+            // setTimeout(() => {
+            // }, 5000);
+    }
+}
+export const deleted = (id) =>{
+    return dispatch => {
+        axios.delete(`https://blog-3dcd5-default-rtdb.firebaseio.com/blog/${id}.json`)
+        .then(response => {
+            dispatch(ViewBlog())
+            console.log(response)})
+            // setTimeout(() => {
+            // }, 5000);
     }
 }

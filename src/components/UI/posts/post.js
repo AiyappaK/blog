@@ -19,8 +19,8 @@ const posts = (props) => {
 		);
 	}
 	return (
-		<div class="blog-card" key={items.id}>
-			<img class="blog-img" src={props.img} alt="NEw IMages" onClick={props.clicked} />
+		<div class="blog-card" onClick={props.clicked} key={items.id}>
+			<img class="blog-img" src={props.img} alt="NEw IMages"  />
 			<div class="text-overlay">
 				<h5>{props.title} </h5>
 				<p class="blog-imgp">{props.caption} </p>

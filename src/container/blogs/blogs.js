@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../../components/UI/spinner/Spinner';
 import Addform from '../../components/form/addfrom';
@@ -11,12 +11,16 @@ const Blog = (props) => {
     const [caption, setcaption] = useState('');
     const [Url, setUrl] = useState('');
     const [Image, setImage] = useState('');
+    const [name, setname] = useState('');
+    const [gsurl, setgsurl] = useState('');
     
-
-    const SubmitImage = async (e) => {
+    let SubmitImage = async (e) => {
 
         e.preventDefault();
         const i = Url;
+        setname(i.name);
+        let fileRe = (`gs://blog-3dcd5.appspot.com/${i.name}`);
+        setgsurl(fileRe);
         const options = {
             maxSizeMB: 1,
             maxWidthOrHeight: 1920,
@@ -29,7 +33,7 @@ const Blog = (props) => {
         };
 
         const fileRef = storageRef.child(i.name).put(i, metadata);
-        
+
         fileRef.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) => {
                 let progress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -59,34 +63,42 @@ const Blog = (props) => {
             },
             () => {
                 // Upload completed successfully, now we can get the download URL
-                fileRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                fileRef.snapshot.ref.getDownloadURL()
+                .then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     setImage(downloadURL);
-                    blog()
+                    console.log(Image, "image");
                     
                 });
                 // setTimeout(() => {
-                    // blog()
-                    // this.posts() if it takes long time then use this
+                    //
+                // this.posts() if it takes long time then use this
                 // }, 5000); 
             },
         );
     }
-    const blog = () => {
-        
+    
+        useEffect(()=>{
+           if (Image !== '') {
+            blog()
+           }
+        },[Image]);
+       
+    let blog = () => {
         const I = {
             title: title,
             caption: caption,
             Image: Image,
-        };
-        props.onBlog(I)
-
+            name: name,
+            gsurl: gsurl
+        }
+        console.log(I);
+        props.onBlog(I)     
     }
 
     return (
         <div>
-        {props.loading ? <Spinner/>: null}
-            <Addform/>
+
             <form className="form-horizontal" onSubmit={SubmitImage}>
                 <fieldset>
                     <div>
@@ -122,8 +134,8 @@ const Blog = (props) => {
     )
 }
 const mapStateToProps = state => {
-    return{
-        
+    return {
+
         loading: state.loading
     }
 }

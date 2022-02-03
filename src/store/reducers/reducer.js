@@ -5,6 +5,7 @@ const initialState = {
     loading: false,
     isSignup: false,
     blogs: [],
+    select: false,
     selected: [],
 };
 
@@ -42,8 +43,18 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                  selected: action.select,
+                 id: action.id,
+                 select:true,
                 loading: false
             }
+            case actionTypes.UPDATED_SUCESS:
+                return {
+                    ...state,
+                     selected: [],
+                     id: '',
+                     select:false,
+                    loading: false
+                }
 
         case actionTypes.VIEW_POST_FAIL:
             return {

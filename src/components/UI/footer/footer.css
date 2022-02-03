@@ -19,22 +19,31 @@ footer ul li a{
 footer ul li a:hover{
   color: var(--primary);
 }
-
+.footerul{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr );
+  place-items: center;  
+}
 footer{
-  width: 100%;
+  /* width: 100%; */
   background: #451c8d;
   color: #fff; 
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2em; 
   font-size: 1.2rem;
 }
-
-
 
 /* Sticky Footer Styling */
 
 .sticky-footer{
   /* position: sticky; */
   top: 100%;
+}
+@media (max-width:600px) {
+  .footerul{
+    /* width: 500px; */
+    grid-template-columns: repeat(3 , 1fr)
+  }
 }
