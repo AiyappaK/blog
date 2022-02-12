@@ -1,0 +1,34 @@
+.image {
+    /* width : 600px;
+    height: 400px; */
+    padding: 20px;
+
+}
+.text{
+    padding: 20px;
+    justify-content:space-evenly;
+    font-size: 15px;
+    overflow: hidden;
+	/* white-space: nowrap; */
+	text-overflow: ellipsis;
+    
+	display: -webkit-box;
+	-webkit-line-clamp: 16;
+	-webkit-box-orient: vertical;
+
+}
+.gallery{
+    
+    
+}
+.items{
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    width: 100%;
+}
+@media (max-width: 600px) {
+    .items{
+        flex-direction: column;
+    }
+}

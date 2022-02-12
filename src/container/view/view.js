@@ -10,7 +10,7 @@ import * as addActions from '../../store/actions/addaction';
 
 import classes from './view.module.css';
 const View = (props) => {
-    const { onViewPost , selected} = props;
+    const { onViewPost, selected } = props;
 
     const [title, setTitle] = useState('');
     const [caption, setcaption] = useState('');
@@ -18,9 +18,8 @@ const View = (props) => {
     const [Image, setImage] = useState('');
     const [name, setname] = useState('');
     const [gsurl, setgsurl] = useState('');
-   
-    // console.log("this.is", props.selected);
-    // console.log("this is", Image);
+
+    console.log("this is", Image);
 
     useEffect(() => {
         props.selected.map(order => (
@@ -31,10 +30,12 @@ const View = (props) => {
             setname(order.name)
         ))
         console.log(title, caption, Image, name, gsurl);
-    },[selected]);
+    }, [selected]);
 
     useEffect(() => {
         onViewPost();
+        // console.log("this.is", blogs);
+
     }, [onViewPost]);
 
     const Submitted = (e) => {
@@ -57,7 +58,7 @@ const View = (props) => {
         setname(i.name)
         console.log(i.name);
         const fileRef = storageRef.child(i.name)
-        .put(i, metadata);
+            .put(i, metadata);
         fileRef.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) => {
                 let progress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -90,23 +91,23 @@ const View = (props) => {
                 let fileRe = (`gs://blog-3dcd5.appspot.com/${i.name}`);
                 setgsurl(fileRe);
                 fileRef.snapshot.ref.getDownloadURL()
-                .then((downloadURL) => {
-                    console.log('File available at', downloadURL);
-                    setImage(downloadURL);
-                    // update()
-                });
+                    .then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        setImage(downloadURL);
+                        // update()
+                    });
             },
-            
+
         );
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (Image !== '') {
-         update()
+            update()
         }
-     },[Image]);
+    }, [Image]);
 
-   const update = () => {
+    const update = () => {
         console.log("here");
         const I = {
             title: title,
@@ -117,9 +118,9 @@ const View = (props) => {
         }
         console.log(I);
         props.onUpdate(props.id, I);
-        
-        
-        console.log('this is updated eith' , props.id,I);
+
+
+        console.log('this is updated eith', props.id, I);
     }
     let selectedBlog = <p>Please select to update </p>
     if (props.select) {
@@ -171,7 +172,7 @@ const View = (props) => {
 
 
     const selectedEdit = (e) => {
-        
+
         props.onSelectedPost(e)
         {/*
             to get selected data add this url: 
@@ -204,13 +205,14 @@ const View = (props) => {
     let posts = <Spinner />
     if (!props.loading) {
         posts = props.blogs.map(order => (
+
             <div key={order.id}>
                 <Post
 
                     title={order.title}
                     caption={order.caption}
                     img={order.Image}
-                    
+
                 />
                 <Button btnType="Success" clicked={() => selectedEdit(order.id)}>Edit</Button>
                 <Button btnType="Danger" clicked={() => Selecteddelete(order.id, order.name)}>Delete</Button>
@@ -236,7 +238,7 @@ const mapStateToProps = state => {
         loading: state.loading,
         select: state.select,
         selected: state.selected,
-        id:state.id
+        id: state.id
     }
 }
 
@@ -245,7 +247,7 @@ const mapDispatchToProps = dispatch => {
         onViewPost: () => dispatch(addActions.ViewBlog()),
         onSelectedPost: (SeId) => dispatch(addActions.selectedPost(SeId)),
         onDelete: (id) => dispatch(addActions.deleted(id)),
-        onUpdate: (sId, data)=>dispatch(addActions.updated(sId, data)),
+        onUpdate: (sId, data) => dispatch(addActions.updated(sId, data)),
     }
 }
 

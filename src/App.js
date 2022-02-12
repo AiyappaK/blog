@@ -5,6 +5,7 @@ import Portpolio from './container/bloging/bloging';
 import { Route, Switch } from 'react-router';
 // import Blog from './container/bloging/bloging';
 import Home from './container/home/home';
+import test from './test';
 import About from './components/about/about';
 import Footer from './components/UI/footer/footer';
 import Addpost from './container/addpost/addpost';
@@ -26,7 +27,7 @@ class App extends Component {
      routes = (
         <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={test} />
         <Route path='/Portpolio' component={Portpolio} />
         <Route path='/blog' component={Blog} />
         <Route path="/About" component={About} />
@@ -41,7 +42,7 @@ class App extends Component {
     else{
       routes=(
       <Switch>
-      <Route path="/" exact component={Home} />
+      <Route path="/" exact component={test} />
       <Route path='/Portpolio' component={Portpolio} />
       <Route path='/blog' component={Blog} />
       <Route path="/About" component={About} />

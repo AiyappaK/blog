@@ -16,9 +16,9 @@ class Blog extends Component {
 
     }
     imageViewHandler = (url) => {
-        console.log('this.state.viewer', this.state.viewer, 'url', this.state.url);
         this.setState({ url: url });
         this.setState({ viewer: true });
+        console.log('this.state.viewer', this.state.viewer, 'url', this.state.url);
         console.log('this.state.viewer', this.state.viewer, 'url', this.state.url);
 
     }
@@ -28,10 +28,11 @@ class Blog extends Component {
     }
 
     render() {
-        // console.log(this.props.posts);
+        
         let posts = <Spinner />
         if (!this.props.loading) {
             posts = this.props.posts.map(order => (
+                
                 <div>
                     <Post
                         key={order.id}
